@@ -1,0 +1,57 @@
+{
+  "name": "credit-tracking-backend",
+  "main": "src/server.ts",
+  "types": "build/server.d.ts",
+  "typings": "build/server.d.ts",
+  "typeRoots": [
+    "./src/node_modules/@types"
+  ],
+  "scripts": {
+    "start": "node build/server.js",
+    "start:dev": "npx nodemon --exec ts-node --files src/server.ts",
+    "build": "npm run clean && tsc",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rm -rf build/",
+    "tsc": "./node_modules/typescript/bin/tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UAlbertaCompEClub/credit-tracking"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UAlbertaCompEClub/credit-tracking/issues"
+  },
+  "homepage": "https://github.com/UAlbertaCompEClub/credit-tracking#readme",
+  "dependencies": {
+    "@sendgrid/mail": "^7.6.0",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express-validator": "^6.13.0",
+    "jsonwebtoken": "^8.5.1",
+    "load-json-file": "^7.0.1",
+    "passport": "^0.5.0",
+    "passport-local": "^1.0.0",
+    "pg": "^8.7.1",
+    "typescript": "^4.4.4",
+    "zapatos": "^5.0.0",
+    "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/jsonwebtoken": "^8.5.6",
+    "@types/node": "^16.11.6",
+    "@types/pg": "^8.6.1",
+    "jest": "^27.3.1",
+    "nodemon": "^2.0.14",
+    "ts-node": "^10.5.0",
+    "ts-node-dev": "^1.1.8",
+    "tslib": "^2.3.1"
+  }
+}

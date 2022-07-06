@@ -1,0 +1,4 @@
+RUN IN BASH (not cmd prompt):
+
+PGUSER=<insert> PGHOST=<insert> PGPASSWORD=<insert> 
+PGDATABASE=<insert> PGPORT=<insert> npx zapatos
