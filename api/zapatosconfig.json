@@ -1,6 +1,6 @@
 {
     "db": {
-        "connectionString": "postgresql://localhost/credit-tracking"
+        "connectionString": "postgresql://localhost/mdtkr-volunteer"
     },
     "outDir": "./src"
 }

@@ -6,17 +6,10 @@ import path from 'path';
 import dotenv from 'dotenv'
 import fs from 'fs';
 
-import routes from './routes/routes';
-import userRoutes from './routes/auth/usersRoutes';
-import authRoutes from './routes/auth/loginRoutes';
-import transactionRoutes from './routes/auth/transactionRoutes';
-import forgotPassRoutes from './routes/forgotPassword/passwordRoutes';
+import usageDataRoutes from './routes/usageData/usageDataRoutes';
 import middleware from './controllers/util/middleware';
 
-import { initializeState } from './sync/state';
 import { hourlyRun } from './sync/sync';
-
-import * as queries from './repositories/base';
 
 require('dotenv').config({ path: 'api.env' });
 
@@ -24,7 +17,7 @@ console.log(
     "DB ACCESS \n",
     "USER:", process.env.PGUSER, "\n",
     "HOST:", process.env.PGHOST, "\n",
-    "PASS:", process.env.PGPASSWORD, "\n",
+    //"PASS:", process.env.PGPASSWORD, "\n",
     "DB_NAME:", process.env.PGDATABASE, "\n",
     "PORT:", process.env.PGPORT, "\n",
     'DB URL: ', process.env.DATABASE_URL
@@ -51,14 +44,7 @@ router.use(express.json());//parse requests as json objects
 /**
  * Routes Definitions
  */
-router.use('/api/v1', routes);
-router.use('/api/v1', userRoutes);
-router.use('/api/v1', authRoutes);
-router.use('/api/v1', transactionRoutes);
-router.use('/api/v1', forgotPassRoutes);
-
-//set up server state
-initializeState();
+router.use('/api/v1/usage-data', usageDataRoutes);
 
 //timed method set-up
 // setInterval(hourlyRun, 20000);

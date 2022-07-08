@@ -1,8 +1,7 @@
 import assert from 'assert';
 import cors from 'cors';
 import express, { NextFunction, Request, Response } from 'express';
-import { verifyToken, verifyUser } from '../../auth/auth';
-import controller from './controllerUtil';
+import controller from './controller';
 
 type middleware = (req: Request, res: Response, next: NextFunction) => void;
 
@@ -56,65 +55,60 @@ function cors_access(): middleware {
  *  @param Express handler to wrap with exception handling.
  *  @returns A Wrapped Express Handler.
 */
-const secureExec = (f: any) => {
-    return async (req: Request, res: Response, next: NextFunction) => {
-        const params = req.body;
-        try {
-            const token = params.token;
-            assert(token !== undefined && token !== null);
+// const secureExec = (f: any) => {
+//     return async (req: Request, res: Response, next: NextFunction) => {
+//         const params = req.body;
+//         try {
+//             const token = params.token;
+//             assert(token !== undefined && token !== null);
 
-            let key = process.env.SECRETKEY;
-            assert(key !== undefined && key !== null);
+//             let key = process.env.SECRETKEY;
+//             assert(key !== undefined && key !== null);
 
-            //checks if user is verified
-            verifyToken(token, key);
+//             //checks if user is verified
+//             verifyToken(token, key);
 
-            //continues with remainder of route function call
-            f.call(this, req, res, next);
-        } catch (e) {
-            res.status(400).json({
-                status: -1
-            })
-        }
-    }
-}
+//             //continues with remainder of route function call
+//             f.call(this, req, res, next);
+//         } catch (e) {
+//             res.status(400).json({
+//                 status: -1
+//             })
+//         }
+//     }
+// }
 
 /**
  *  This is a wrapper that performs exec token checking for routes.
  *  @param Express handler to wrap with exception handling.
  *  @returns A Wrapped Express Handler.
 */
-const secureUser = (f: any) => {
-    return async (req: Request, res: Response, next: NextFunction) => {
-        const params = req.body;
-        try {
-            const token = params.token;
-            assert(token !== undefined && token !== null);
+// const secureUser = (f: any) => {
+//     return async (req: Request, res: Response, next: NextFunction) => {
+//         const params = req.body;
+//         try {
+//             const token = params.token;
+//             assert(token !== undefined && token !== null);
 
-            let key = process.env.SECRETKEY;
-            assert(key !== undefined && key !== null);
+//             let key = process.env.SECRETKEY;
+//             assert(key !== undefined && key !== null);
 
-            //checks if user is verified
-            verifyUser(token, key);
+//             //checks if user is verified
+//             verifyUser(token, key);
 
-            //continues with remainder of route function call
-            f.call(this, req, res, next);
-        } catch (e) {
-            res.status(400).json({
-                status: -1
-            })
-        }
-    }
-}
+//             //continues with remainder of route function call
+//             f.call(this, req, res, next);
+//         } catch (e) {
+//             res.status(400).json({
+//                 status: -1
+//             })
+//         }
+//     }
+// }
 
 
 export default {
     consoleDisplay,
     bodyParser,
     cors_call
-};
-
-export {
-    secureExec,
-    secureUser
 };
