@@ -4,7 +4,6 @@ const basic = (f: any) => {
     return async (req: Request, res: Response, next: NextFunction) => {
         new Promise<void>((resolve) => {
             resolve();
-            console.log('transaction creation process begin!')
         })
         .then( f.call(this, req, res, next) )
         .then(data =>
@@ -19,6 +18,7 @@ const basic = (f: any) => {
         );
     }
 }
+
 export {
     basic
 };

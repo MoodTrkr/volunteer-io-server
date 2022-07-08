@@ -3,7 +3,8 @@ import controller from '../util/controller';
 import jwt from 'jsonwebtoken';
 import assert from 'assert';
 import * as usageRepo from '../../repositories/usageDataRepo';
-import * as wrappers from '../util/promiseWrappers'
+import * as wrappers from '../util/promiseWrappers';
+import { ExpressExtended } from  '../../data/interface/express';
 
 import type * as mdtkrSchema from '../../data/schema';
 import type * as schema from 'zapatos/schema';
@@ -15,7 +16,7 @@ function isUserDefined(user: Express.User | undefined): user is Express.User {
     return user !== undefined;
 }
 
-const insertUsageData = async (req: Request, res: Response) => {
+const insertUsageData = async (req: ExpressExtended.AuthenticatedRequest, res: Response) => {
     const params = req.body;
     wrappers.basic(() => {
         const user = req.user;
@@ -24,7 +25,7 @@ const insertUsageData = async (req: Request, res: Response) => {
     })
 };
 
-const getUsageData = async (req: Request, res: Response) => {
+const getUsageData = async (req: ExpressExtended.AuthenticatedRequest, res: Response) => {
     const params = req.body;
     wrappers.basic(() => {
         const user = req.user;
