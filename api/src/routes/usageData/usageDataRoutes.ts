@@ -4,8 +4,7 @@ import { checkJwt } from '../../auth/auth';
 
 
 const router = express.Router();
-router.get('/get', usageDataController.getUsageData);
-router.post('/insert', usageDataController.insertUsageData);
-router.get('/hello', usageDataController.hello);
+router.get('/get', checkJwt, usageDataController.getUsageData);
+router.post('/insert', checkJwt, usageDataController.insertUsageData);
 
 export default router;

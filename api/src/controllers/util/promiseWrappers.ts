@@ -7,14 +7,10 @@ const basic = (f: any) => {
         })
         .then( f.call(this, req, res, next) )
         .then(data =>
-            res.status(200).json({
-                status: 1
-            })
+            res.status(200).send(true)
         )
         .catch(data =>
-            res.status(400).json({
-                status: -1
-            })
+            res.status(400).send(false)
         );
     }
 }
