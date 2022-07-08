@@ -34,7 +34,7 @@ const port = process.env.PORT || "8000";
 
 // router.set("views", path.join(__dirname, "views"));
 // router.use(express.static(path.join(__dirname, "public")));
-// router.use(middleware.bodyParser());
+router.use(middleware.bodyParser());
 router.use(middleware.consoleDisplay());
 // router.use(express.json());//parse requests as json objects
 
