@@ -5,7 +5,7 @@ import assert from 'assert';
 import * as usageRepo from '../../repositories/usageDataRepo';
 import * as wrappers from '../util/promiseWrappers'
 
-import type * as mdtkrSchema from 'mdtkr/schema';
+import type * as mdtkrSchema from '../../data/schema';
 import type * as schema from 'zapatos/schema';
 import { transaction } from 'zapatos/db';
 
