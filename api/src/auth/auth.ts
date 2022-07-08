@@ -1,11 +1,19 @@
-import { auth } from 'express-oauth2-jwt-bearer';
 import process from 'process';
-require('dotenv').config({ path: 'auth/secret-key.env' });
 
-const checkJwt = auth({
+require('dotenv').config({ path: 'auth/secret-key.env' });
+import { expressjwt } from 'express-jwt';
+var jwks = require('jwks-rsa');
+
+var checkJwt = expressjwt({
+	secret: jwks.expressJwtSecret({
+		cache: true,
+		rateLimit: true,
+		jwksRequestsPerMinute: 5,
+		jwksUri: process.env.AUTH0_JWKS_URI
+	}),
 	audience: process.env.AUTH0_AUDIENCE,
-	issuerBaseURL: process.env.AUTH0_ISSUER,
-	jwksUri: process.env.AUTH0_JWKS_URI
+	issuer: process.env.AUTH0_ISSUER,
+	algorithms: ['RS256']
 });
 
 export {
