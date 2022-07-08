@@ -16,11 +16,12 @@ require('dotenv').config({ path: './src/auth/secret-key.env' });
 //     return user !== undefined;
 // }
 
-const insertUsageData = async (req: Request, res: Response) => {
+const insertUsageData = async (req: ExpressExtended.AuthenticatedRequest, res: Response) => {
     const params = req.body;
+    console.log('insert begin');
     wrappers.basic(() => {
-        // const user = req.user;
-        // console.log(user);
+        const user = req.user;
+        console.log(user);
         console.log(req.body);
         // const usageData = req.body as mdtkrSchema.MTData.MTUsageData;
         // if (isUserDefined(user)) { usageRepo.insertUsageData(user, usageData.date, usageData) }
@@ -28,9 +29,10 @@ const insertUsageData = async (req: Request, res: Response) => {
 };
 
 const getUsageData = async (req: ExpressExtended.AuthenticatedRequest, res: Response) => {
+    console.log('get begin');
     const params = req.body;
     wrappers.basic(() => {
-        // const user = req.user;
+        const user = req.user;
         const usageData = req.body;
         // if (isUserDefined(user)) { usageRepo.getUsageData(user, usageData.date) }
     })
