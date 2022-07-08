@@ -17,17 +17,6 @@ function bodyParser(): middleware {
     return bodyParser;
 };
 
-function cors_call(): middleware {
-    let origin:string|string[] = '*';
-    process.env.NODE_ENV === "production" ? origin = ['https://wonderful-clarke-09beec.netlify.app/*', 'https://wonderful-clarke-09beec.netlify.app'] : console.log('NODE_ENV not in production.');
-    const corsOptions = {
-        origin: origin,
-        credentials: true,            //access-control-allow-credentials:true
-        optionSuccessStatus: 200
-    }
-    return cors(corsOptions);
-};
-
 // Add headers before the routes are defined
 function cors_access(): middleware {
     return (req: Request, res: Response, next: NextFunction) => {
@@ -109,6 +98,5 @@ function cors_access(): middleware {
 
 export default {
     consoleDisplay,
-    bodyParser,
-    cors_call
+    bodyParser
 };
