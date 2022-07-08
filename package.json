@@ -1,0 +1,10 @@
+{
+    "name": "mdtkr-volunteer-io-server",
+    "version": "1.0.0",
+    "scripts": {
+        "start": "cd api && npm start",
+        "postinstall": "cd api && npm i",
+        "build": "cd api && npm run build",
+        "deploy": "git add --all && git commit -m Heroku && git push heroku main"
+    }
+}

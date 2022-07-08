@@ -1,5 +1,5 @@
 {
-  "name": "credit-tracking-backend",
+  "name": "mdtkr-volunteer-io-server",
   "main": "src/server.ts",
   "types": "build/server.d.ts",
   "typings": "build/server.d.ts",
@@ -15,16 +15,11 @@
     "tsc": "./node_modules/typescript/bin/tsc"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/UAlbertaCompEClub/credit-tracking"
+    "type": "git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/UAlbertaCompEClub/credit-tracking/issues"
-  },
-  "homepage": "https://github.com/UAlbertaCompEClub/credit-tracking#readme",
   "dependencies": {
     "@sendgrid/mail": "^7.6.0",
     "bcrypt": "^5.0.1",
