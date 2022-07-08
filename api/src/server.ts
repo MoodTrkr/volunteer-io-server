@@ -8,6 +8,7 @@ import fs from 'fs';
 
 import usageDataRoutes from './routes/usageData/usageDataRoutes';
 import middleware from './controllers/util/middleware';
+import { auth } from 'express-oauth2-jwt-bearer';
 
 import { hourlyRun } from './sync/sync';
 
