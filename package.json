@@ -6,5 +6,8 @@
         "postinstall": "cd api && npm i",
         "build": "cd api && npm run build",
         "deploy": "git add --all && git commit -m Heroku && git push heroku main"
+    },
+    "dependencies": {
+        "express-oauth2-jwt-bearer": "^1.1.0"
     }
 }

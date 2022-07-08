@@ -4,7 +4,7 @@
   "types": "build/server.d.ts",
   "typings": "build/server.d.ts",
   "engines": {
-    "node": "14.18.1"
+    "node": "16.x"
   },
   "typeRoots": [
     "./src/node_modules/@types"
