@@ -12,7 +12,9 @@ const insertUsageData = (user: string, time: Date, usageData: mdtkrSchema.MTData
         ts: time,
         usage_data: JSON.stringify(usageData)
     };
-    return db.insert('usage_data_table', insert).run(connection);
+    db.upsert('usage_data_table', insert, 'id', {
+        updateColumns: db.doNothing
+    }).run(connection);
 };
 
 const getUsageData = ( user: string, time: Date ) => {
@@ -20,7 +22,7 @@ const getUsageData = ( user: string, time: Date ) => {
         id_user: user,
         ts: time
     };
-    return db.select('usage_data_table', where).run(connection);
+    return db.selectExactlyOne('usage_data_table', where).run(connection);
 };
 
 const getAllUsageData = (user: string) => {
