@@ -12,15 +12,17 @@ import { transaction } from 'zapatos/db';
 
 require('dotenv').config({ path: './src/auth/secret-key.env' });
 
-function isUserDefined(user: Express.User | undefined): user is Express.User {
-    return user !== undefined;
-}
+// function isUserDefined(user: Express.User | undefined): user is Express.User {
+//     return user !== undefined;
+// }
 
 const insertUsageData = async (req: ExpressExtended.AuthenticatedRequest, res: Response) => {
     const params = req.body;
     wrappers.basic(() => {
         const user = req.user;
-        const usageData = req.body as mdtkrSchema.MTData.MTUsageData;
+        console.log(user);
+        console.log(req.body);
+        // const usageData = req.body as mdtkrSchema.MTData.MTUsageData;
         // if (isUserDefined(user)) { usageRepo.insertUsageData(user, usageData.date, usageData) }
     })
 };
