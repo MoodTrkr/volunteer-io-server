@@ -2,6 +2,10 @@ import { Request, Application } from 'express';
 
 export namespace ExpressExtended {
     export interface AuthenticatedRequest extends Request {
-        user?: any
+        user?: Auth0User
+    }
+
+    export interface Auth0User {
+        sub?: string
     }
 }

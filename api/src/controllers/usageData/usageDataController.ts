@@ -6,27 +6,38 @@ import * as usageRepo from '../../repositories/usageDataRepo';
 import * as wrappers from '../util/wrappers';
 import { ExpressExtended } from  '../../data/interface/express';
 
-import type * as mdtkrSchema from '../../data/schema';
+import * as mdtkrSchema from '../../data/report/schema';
+import isMTUsageData from "../../data/report/guard";
 import type * as schema from 'zapatos/schema';
 import { transaction } from 'zapatos/db';
+import { JWTPayload } from 'express-oauth2-jwt-bearer';
 
 require('dotenv').config({ path: './src/auth/secret-key.env' });
 
-// function isUserDefined(user: Express.User | undefined): user is Express.User {
-//     return user !== undefined;
-// }
+function isStringDefined(str: string | undefined): str is string {
+    return str !== undefined;
+}
 
 const insertUsageData = controller((req: ExpressExtended.AuthenticatedRequest, res: Response) => {
-    const params = req.body;
     console.log('insert begin');
     console.log("user", req.user);
     console.log("auth", req.auth);
+    
     console.log(req.body);
-    res.status(200).send(true);
-    // wrappers.basic((req: ExpressExtended.AuthenticatedRequest, res: Response) => {
-    //     // const usageData = req.body as mdtkrSchema.MTData.MTUsageData;
-    //     // if (isUserDefined(user)) { usageRepo.insertUsageData(user, usageData.date, usageData) }
-    // })
+    const userId = req.auth?.payload.sub;
+    const usageDataDate = req.query.date;
+    const usageData = req.body;
+    const usageDataCheck = isMTUsageData(req.body);
+
+    console.log("isMTUsageData", isMTUsageData)
+
+    if (isStringDefined(userId)
+        && typeof usageDataDate === "number"
+        && usageDataCheck) {
+        usageRepo.insertUsageData(userId, usageDataDate, usageData)
+        res.status(200).send(true);
+    }
+    else { res.status(200).send(false); }
 });
 
 const getUsageData = async (req: ExpressExtended.AuthenticatedRequest, res: Response) => {
