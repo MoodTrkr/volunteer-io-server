@@ -19,7 +19,7 @@ require('dotenv').config({ path: './src/auth/secret-key.env' });
 const insertUsageData = controller((req: ExpressExtended.AuthenticatedRequest, res: Response) => {
     const params = req.body;
     console.log('insert begin');
-    wrappers.basic(() => {
+    wrappers.basic((req: ExpressExtended.AuthenticatedRequest) => {
         const user = req.user;
         console.log(user);
         console.log(req.body);
@@ -31,7 +31,7 @@ const insertUsageData = controller((req: ExpressExtended.AuthenticatedRequest, r
 const getUsageData = async (req: ExpressExtended.AuthenticatedRequest, res: Response) => {
     console.log('get begin');
     const params = req.body;
-    wrappers.basic(() => {
+    wrappers.basic((req: ExpressExtended.AuthenticatedRequest) => {
         const user = req.user;
         console.log(user);
         const usageData = req.body;

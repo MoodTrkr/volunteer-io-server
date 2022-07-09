@@ -5,7 +5,7 @@ const basic = (f: any) => {
         new Promise<void>((resolve) => {
             resolve();
         })
-        .then( f.call(this, req, res, next) )
+        .then(f.call(req) )
         .then(data =>
             res.status(200).send(true)
         )
