@@ -13,7 +13,7 @@ function consoleDisplay(): middleware {
 };
 
 function bodyParser(): middleware {
-    const bodyParser = express.json();
+    const bodyParser = express.json({ limit: '5mb' });
     return bodyParser;
 };
 
