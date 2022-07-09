@@ -2,7 +2,7 @@ import { timeStamp } from 'console';
 import { Pool, Client } from 'pg';
 import { conditions as dc } from 'zapatos/db';
 import * as db from 'zapatos/db';
-import type * as mdtkrSchema from '../data/schema';
+import type * as mdtkrSchema from '../data/report/schema';
 import type * as schema from 'zapatos/schema';
 import connection from './connection';
 
