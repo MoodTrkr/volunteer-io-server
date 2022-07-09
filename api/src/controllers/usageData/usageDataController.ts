@@ -22,7 +22,7 @@ const insertUsageData = controller((req: ExpressExtended.AuthenticatedRequest, r
     const user = req.user;
     console.log(user);
     console.log(req.body);
-    res.status(200).send(200);
+    res.status(200).send(true);
     // wrappers.basic(() => {
 
     //     // const usageData = req.body as mdtkrSchema.MTData.MTUsageData;
