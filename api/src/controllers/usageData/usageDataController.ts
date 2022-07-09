@@ -3,7 +3,7 @@ import controller from '../util/controller';
 import jwt from 'jsonwebtoken';
 import assert from 'assert';
 import * as usageRepo from '../../repositories/usageDataRepo';
-import * as wrappers from '../util/promiseWrappers';
+import * as wrappers from '../util/wrappers';
 import { ExpressExtended } from  '../../data/interface/express';
 
 import type * as mdtkrSchema from '../../data/schema';
@@ -19,9 +19,9 @@ require('dotenv').config({ path: './src/auth/secret-key.env' });
 const insertUsageData = controller((req: ExpressExtended.AuthenticatedRequest, res: Response) => {
     const params = req.body;
     console.log('insert begin');
-    wrappers.basic((req: ExpressExtended.AuthenticatedRequest) => {
-        const user = req.user;
-        console.log(user);
+    wrappers.basic((req: ExpressExtended.AuthenticatedRequest, res: Response) => {
+        console.log("user", req.user);
+        console.log("auth", req.auth);
         console.log(req.body);
         // const usageData = req.body as mdtkrSchema.MTData.MTUsageData;
         // if (isUserDefined(user)) { usageRepo.insertUsageData(user, usageData.date, usageData) }
