@@ -34,7 +34,7 @@ const insertUsageData = controller((req: ExpressExtended.AuthenticatedRequest, r
     if (isStringDefined(userId)
         && typeof usageDataDate === "number"
         && usageDataCheck) {
-        usageRepo.insertUsageData(userId, usageDataDate, usageData)
+        usageRepo.insertUsageData(userId, usageDataDate, usageData as mdtkrSchema.MTData.MTUsageData)
         res.status(200).send(true);
     }
     else { res.status(200).send(false); }
