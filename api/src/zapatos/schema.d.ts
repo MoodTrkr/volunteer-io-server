@@ -157,7 +157,7 @@ declare module 'zapatos/schema' {
       */
       usage_data?: db.JSONValue | db.Parameter<db.JSONValue> | db.DefaultType | db.SQLFragment | db.SQLFragment<any, db.JSONValue | db.Parameter<db.JSONValue> | db.DefaultType | db.SQLFragment>;
     }
-    export type UniqueIndex = 'usage_data_table_pkey';
+    export type UniqueIndex = 'usage_data_table_id_user_ts_key' | 'usage_data_table_pkey';
     export type Column = keyof Selectable;
     export type OnlyCols<T extends readonly Column[]> = Pick<Selectable, T[number]>;
     export type SQLExpression = db.GenericSQLExpression | db.ColumnNames<Updatable | (keyof Updatable)[]> | db.ColumnValues<Updatable> | Table | Whereable | Column;
