@@ -18,8 +18,8 @@ function isAuthDefined(obj: Express.Request['auth'] | undefined): obj is Express
     return obj !== undefined;
 }
 
-function isStringDefined(str: string | undefined): str is string {
-    return str !== undefined;
+function isStringDefined(str: string | undefined | null): str is string {
+    return (str !== undefined) && (str !== null);
 }
 
 const insertUsageData = controller((req: ExpressExtended.AuthenticatedRequest, res: Response) => {
@@ -30,7 +30,11 @@ const insertUsageData = controller((req: ExpressExtended.AuthenticatedRequest, r
     console.log(req.body);
 
     const authUser = req.auth;
-    const userId = req.auth?.payload.sub;
+    var userId;
+    if (authUser!==undefined) {
+        userId = authUser.payload.sub;
+    }
+
     const usageDataDate = req.query.date;
     const usageData = req.body;
     const usageDataCheck = isMTUsageData(req.body);
