@@ -18,8 +18,8 @@ import { auth } from 'express-oauth2-jwt-bearer';
 // });
 
 const checkJwt = auth({
-	audience: 'YOUR_API_IDENTIFIER',
-	issuerBaseURL: `https://YOUR_DOMAIN/`,
+	audience: process.env.AUTH0_AUDIENCE,
+	issuerBaseURL: process.env.AUTH0_ISSUER
 });
 
 export {
