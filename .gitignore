@@ -353,4 +353,5 @@ MigrationBackup/
 *.env
 "sendgrid.env"
 "api.env"
-src/auth/secret-key.env
+api/src/auth/secret-key.env
+api/src/repositories/connection.ts
