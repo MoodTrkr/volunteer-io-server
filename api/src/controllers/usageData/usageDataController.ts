@@ -24,8 +24,7 @@ function isStringDefined(str: string | undefined | null): str is string {
 
 const insertUsageData = controller((req: ExpressExtended.AuthenticatedRequest, res: Response) => {
     console.log('insert begin');
-    console.log("user", req.user);
-    console.log("auth", req.auth);
+    // console.log("auth", req.auth);
     console.log(req.body);
     
     if (!req.auth == undefined) { return res.status(400).send(false) }
@@ -36,14 +35,10 @@ const insertUsageData = controller((req: ExpressExtended.AuthenticatedRequest, r
     const usageData = req.body;
     const usageDataCheck = isMTUsageData(req.body);
 
-    console.log("userId", userId);
-    console.log("isMTUsageData", usageDataCheck);
-    console.log("typeof usageDataDate", `${typeof usageDataDate}`)
-
     if (isStringDefined(userId)
-            && typeof usageDataDate === "number"
+            && typeof usageDataDate === "string"
             && usageDataCheck) {
-        usageRepo.insertUsageData(userId, usageDataDate, usageData as mdtkrSchema.MTData.MTUsageData)
+        usageRepo.insertUsageData(userId, new Date(parseInt(usageDataDate)), usageData as mdtkrSchema.MTData.MTUsageData)
         return res.status(200).send(true);
     }
     else { return res.status(200).send(false) }
