@@ -38,6 +38,7 @@ const insertUsageData = controller((req: ExpressExtended.AuthenticatedRequest, r
 
     console.log("userId", userId);
     console.log("isMTUsageData", usageDataCheck);
+    console.log("typeof usageDataDate", `${typeof usageDataDate}`)
 
     if (isStringDefined(userId)
             && typeof usageDataDate === "number"
