@@ -26,14 +26,10 @@ const insertUsageData = controller((req: ExpressExtended.AuthenticatedRequest, r
     console.log('insert begin');
     console.log("user", req.user);
     console.log("auth", req.auth);
-    
     console.log(req.body);
-
-    const authUser = req.auth;
+    
+    if (!req.auth == undefined) { return res.status(400).send(false) }
     var userId;
-    if (authUser!==undefined) {
-        userId = authUser.payload.sub;
-    }
 
     const usageDataDate = req.query.date;
     const usageData = req.body;
@@ -46,9 +42,9 @@ const insertUsageData = controller((req: ExpressExtended.AuthenticatedRequest, r
             && typeof usageDataDate === "number"
             && usageDataCheck) {
         usageRepo.insertUsageData(userId, usageDataDate, usageData as mdtkrSchema.MTData.MTUsageData)
-        res.status(200).send(true);
+        return res.status(200).send(true);
     }
-    else { res.status(200).send(false) }
+    else { return res.status(200).send(false) }
 });
 
 const getUsageData = async (req: ExpressExtended.AuthenticatedRequest, res: Response) => {
