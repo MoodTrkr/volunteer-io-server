@@ -14,7 +14,12 @@ function consoleDisplay(): middleware {
 };
 
 function bodyParser(): middleware {
-    const bodyParser = express.json({ limit: '5mb' });
+    const bodyParser = express.json({ limit: process.env.MAX_REQ_SIZE || "5 mb" });
+    return bodyParser;
+};
+
+function urlEncoding(): middleware {
+    const bodyParser = express.urlencoded({ limit: process.env.MAX_REQ_SIZE || "5 mb", extended: true, parameterLimit: 50000 });
     return bodyParser;
 };
 
@@ -99,5 +104,6 @@ function cors_access(): middleware {
 
 export default {
     consoleDisplay,
-    bodyParser
+    bodyParser,
+    urlEncoding
 };
