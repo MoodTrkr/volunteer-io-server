@@ -14,6 +14,10 @@ import { JWTPayload } from 'express-oauth2-jwt-bearer';
 
 require('dotenv').config({ path: './src/auth/secret-key.env' });
 
+function isAuthDefined(obj: Express.Request['auth'] | undefined): obj is Express.Request['auth'] {
+    return obj !== undefined;
+}
+
 function isStringDefined(str: string | undefined): str is string {
     return str !== undefined;
 }
@@ -24,20 +28,23 @@ const insertUsageData = controller((req: ExpressExtended.AuthenticatedRequest, r
     console.log("auth", req.auth);
     
     console.log(req.body);
+
+    const authUser = req.auth;
     const userId = req.auth?.payload.sub;
     const usageDataDate = req.query.date;
     const usageData = req.body;
     const usageDataCheck = isMTUsageData(req.body);
 
-    console.log("isMTUsageData", isMTUsageData)
+    console.log("userId", userId);
+    console.log("isMTUsageData", usageDataCheck);
 
     if (isStringDefined(userId)
-        && typeof usageDataDate === "number"
-        && usageDataCheck) {
+            && typeof usageDataDate === "number"
+            && usageDataCheck) {
         usageRepo.insertUsageData(userId, usageDataDate, usageData as mdtkrSchema.MTData.MTUsageData)
         res.status(200).send(true);
     }
-    else { res.status(200).send(false); }
+    else { res.status(200).send(false) }
 });
 
 const getUsageData = async (req: ExpressExtended.AuthenticatedRequest, res: Response) => {
