@@ -8,7 +8,7 @@ type middleware = (req: Request, res: Response, next: NextFunction) => void;
 function consoleDisplay(): middleware {
     return (req: Request, res: Response, next: NextFunction) => {
         console.log(`Request_Endpoint: ${req.method} ${req.url}`);
-        console.log("Request_Length: ", req.get("content-length"));
+        console.log("Request_Length: ", req.socket.bytesRead);
         next();
     };
 };
