@@ -29,7 +29,8 @@ const insertUsageData = controller((req: ExpressExtended.AuthenticatedRequest, r
     console.log(req.body);
     
     if (!req.auth == undefined) { return res.status(400).send(false) }
-    var userId;
+    var userId = req.auth?.payload.sub;
+    if (!userId == undefined) { return res.status(400).send(false) }
 
     const usageDataDate = req.query.date;
     const usageData = req.body;
