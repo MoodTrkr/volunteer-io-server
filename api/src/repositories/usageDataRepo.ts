@@ -6,7 +6,7 @@ import * as db from 'zapatos/db';
 import type * as mdtkrSchema from '../data/report/schema';
 import type * as schema from 'zapatos/schema';
 import connection from './connection';
-import isMTUsageData from 'data/report/guard';
+import isMTUsageData from '../data/report/guard';
 
 const insertUsageData = (user: string, time: Date, usageData: mdtkrSchema.MTData.MTUsageData) => {
     var bufferObject = Buffer.from(JSON.stringify(usageData));
