@@ -48,10 +48,10 @@ declare module 'zapatos/schema' {
       ts: Date;
       /**
       * **usage_data_table.usage_data**
-      * - `json` in database
-      * - `NOT NULL`, default: `'{}'::json`
+      * - `bytea` in database
+      * - `NOT NULL`, no default
       */
-      usage_data: db.JSONValue;
+      usage_data: Buffer;
     }
     export interface JSONSelectable {
       /**
@@ -74,10 +74,10 @@ declare module 'zapatos/schema' {
       ts: db.DateString;
       /**
       * **usage_data_table.usage_data**
-      * - `json` in database
-      * - `NOT NULL`, default: `'{}'::json`
+      * - `bytea` in database
+      * - `NOT NULL`, no default
       */
-      usage_data: db.JSONValue;
+      usage_data: db.ByteArrayString;
     }
     export interface Whereable {
       /**
@@ -100,10 +100,10 @@ declare module 'zapatos/schema' {
       ts?: (db.DateString | Date) | db.Parameter<(db.DateString | Date)> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, (db.DateString | Date) | db.Parameter<(db.DateString | Date)> | db.SQLFragment | db.ParentColumn>;
       /**
       * **usage_data_table.usage_data**
-      * - `json` in database
-      * - `NOT NULL`, default: `'{}'::json`
+      * - `bytea` in database
+      * - `NOT NULL`, no default
       */
-      usage_data?: db.JSONValue | db.Parameter<db.JSONValue> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, db.JSONValue | db.Parameter<db.JSONValue> | db.SQLFragment | db.ParentColumn>;
+      usage_data?: (db.ByteArrayString | Buffer) | db.Parameter<(db.ByteArrayString | Buffer)> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, (db.ByteArrayString | Buffer) | db.Parameter<(db.ByteArrayString | Buffer)> | db.SQLFragment | db.ParentColumn>;
     }
     export interface Insertable {
       /**
@@ -126,10 +126,10 @@ declare module 'zapatos/schema' {
       ts: (db.DateString | Date) | db.Parameter<(db.DateString | Date)> | db.SQLFragment;
       /**
       * **usage_data_table.usage_data**
-      * - `json` in database
-      * - `NOT NULL`, default: `'{}'::json`
+      * - `bytea` in database
+      * - `NOT NULL`, no default
       */
-      usage_data?: db.JSONValue | db.Parameter<db.JSONValue> | db.DefaultType | db.SQLFragment;
+      usage_data: (db.ByteArrayString | Buffer) | db.Parameter<(db.ByteArrayString | Buffer)> | db.SQLFragment;
     }
     export interface Updatable {
       /**
@@ -152,10 +152,10 @@ declare module 'zapatos/schema' {
       ts?: (db.DateString | Date) | db.Parameter<(db.DateString | Date)> | db.SQLFragment | db.SQLFragment<any, (db.DateString | Date) | db.Parameter<(db.DateString | Date)> | db.SQLFragment>;
       /**
       * **usage_data_table.usage_data**
-      * - `json` in database
-      * - `NOT NULL`, default: `'{}'::json`
+      * - `bytea` in database
+      * - `NOT NULL`, no default
       */
-      usage_data?: db.JSONValue | db.Parameter<db.JSONValue> | db.DefaultType | db.SQLFragment | db.SQLFragment<any, db.JSONValue | db.Parameter<db.JSONValue> | db.DefaultType | db.SQLFragment>;
+      usage_data?: (db.ByteArrayString | Buffer) | db.Parameter<(db.ByteArrayString | Buffer)> | db.SQLFragment | db.SQLFragment<any, (db.ByteArrayString | Buffer) | db.Parameter<(db.ByteArrayString | Buffer)> | db.SQLFragment>;
     }
     export type UniqueIndex = 'usage_data_table_id_user_ts_key' | 'usage_data_table_pkey';
     export type Column = keyof Selectable;

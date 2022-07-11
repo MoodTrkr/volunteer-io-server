@@ -40,7 +40,8 @@
     "passport-local": "^1.0.0",
     "pg": "^8.7.1",
     "typescript": "^4.4.4",
-    "zapatos": "^5.0.0"
+    "zapatos": "^5.0.0",
+    "zlib": "^1.0.5"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
