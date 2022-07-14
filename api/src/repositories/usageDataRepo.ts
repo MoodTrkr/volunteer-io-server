@@ -19,7 +19,8 @@ const insertUsageData = (user: string, time: Date, usageData: mdtkrSchema.MTData
                 ts: time,
                 usage_data: zippedData
             };
-            db.upsert('usage_data_table', insert, 'id', {
+            db.upsert('usage_data_table', insert,
+            db.constraint('usage_data_table_id_user_ts_key'), {
                 updateColumns: db.doNothing
             }).run(connection);
         }
