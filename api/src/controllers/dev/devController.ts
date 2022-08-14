@@ -13,18 +13,14 @@ const encrypt = async (data: String) => {
 
 const getAllUsageData = async (req: ExpressExtended.AuthenticatedRequest, res: Response) => {
     var data = await usageRepo.getAllUsageDataDev();
-    var dataDecompressed = Array();
-    
-    data.forEach(entry => {
-        dataDecompressed.push(
-            zlib.brotliDecompressSync(
-                Buffer.from(entry.usage_data, 'base64'),
-                { finishFlush: zlib.constants.BROTLI_OPERATION_FLUSH }
-            ));
-    })
-
-    console.log(dataDecompressed[0].toString('ucs2'));
-    if (data.length>0) return res.status(200).json(dataDecompressed);
+    // var dataDecompressed = Array();
+    // data.forEach(entry => {
+    //     entry.usage_data = zlib.brotliDecompressSync(
+    //         Buffer.from(entry.usage_data, 'base64'),
+    //         { finishFlush: zlib.constants.BROTLI_OPERATION_FLUSH }
+    //     )
+    // })
+    if (data.length>0) return res.status(200).json(data);
     else return res.status(200);
 };
 
