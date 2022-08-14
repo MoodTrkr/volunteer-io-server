@@ -22,6 +22,8 @@ const getAllUsageData = async (req: ExpressExtended.AuthenticatedRequest, res: R
                 { finishFlush: zlib.constants.BROTLI_OPERATION_FLUSH }
             ));
     })
+
+    console.log(dataDecompressed[0])
     if (data.length>0) return res.status(200).json(dataDecompressed);
     else return res.status(200);
 };
