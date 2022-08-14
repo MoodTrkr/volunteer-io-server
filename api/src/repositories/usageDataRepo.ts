@@ -9,7 +9,7 @@ import connection from './connection';
 import isMTUsageData from '../data/report/guard';
 
 const insertUsageData = (user: string, time: Date, usageData: mdtkrSchema.MTData.MTUsageData) => {
-    var bufferObject = Buffer.from(JSON.stringify(usageData), 'base64');
+    var bufferObject = Buffer.from(JSON.stringify(usageData), 'base64').toString('base64');
     zlib.brotliCompress(bufferObject, (err: Error | null, zippedData: Buffer) => {
         if (err) {
             console.log("error in gzip compression", err);
