@@ -17,11 +17,11 @@ const getAllUsageData = async (req: ExpressExtended.AuthenticatedRequest, res: R
     data.forEach(entry => {
         dataDecompressed.push(
             zlib.brotliDecompressSync(
-                Buffer.from(entry.usage_data, 'utf8')
+                entry.usage_data
             ).toJSON());
     })
     if (data.length>0) return res.status(200).json(dataDecompressed);
-    else return res.status(201);
+    else return res.status(200);
 };
 
 export {
