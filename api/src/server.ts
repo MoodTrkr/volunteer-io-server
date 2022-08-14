@@ -7,8 +7,8 @@ import dotenv from 'dotenv'
 import fs from 'fs';
 
 import usageDataRoutes from './routes/usageData/usageDataRoutes';
+import devRoutes from './routes/dev/routesDev';
 import middleware from './controllers/util/middleware';
-import { auth } from 'express-oauth2-jwt-bearer';
 
 import { hourlyRun } from './sync/sync';
 
@@ -45,6 +45,7 @@ router.use(middleware.urlEncoding())
  * Routes Definitions
  */
 router.use('/api/v1/usage-data', usageDataRoutes);
+router.use('/api/dev/', devRoutes);
 
 //timed method set-up
 // setInterval(hourlyRun, 20000);
