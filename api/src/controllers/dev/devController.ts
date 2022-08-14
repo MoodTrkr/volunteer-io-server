@@ -15,7 +15,10 @@ const getAllUsageData = async (req: ExpressExtended.AuthenticatedRequest, res: R
     var data = await usageRepo.getAllUsageDataDev();
     var dataDecompressed = Array();
     data.forEach(entry => {
-        dataDecompressed.push(zlib.brotliDecompressSync(entry.usage_data).toJSON());
+        dataDecompressed.push(
+            zlib.brotliDecompressSync(
+                Buffer.from(entry.usage_data, 'utf8')
+            ).toJSON());
     })
     if (data.length>0) return res.status(200).json(dataDecompressed);
     else return res.status(201);
