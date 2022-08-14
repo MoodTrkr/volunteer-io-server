@@ -18,7 +18,7 @@ const getAllUsageData = async (req: ExpressExtended.AuthenticatedRequest, res: R
     data.forEach(entry => {
         dataDecompressed.push(
             zlib.brotliDecompressSync(
-                Buffer.from(entry.usage_data, 'utf-8'),
+                Buffer.from(entry.usage_data, 'base64'),
                 { finishFlush: zlib.constants.BROTLI_OPERATION_FLUSH }
             ));
     })
