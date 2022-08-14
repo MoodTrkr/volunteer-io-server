@@ -14,11 +14,11 @@ const encrypt = async (data: String) => {
 const getAllUsageData = async (req: ExpressExtended.AuthenticatedRequest, res: Response) => {
     var data = await usageRepo.getAllUsageDataDev();
     var dataDecompressed = Array();
-    data.forEach(async entry => {
+    data.forEach(entry => {
         dataDecompressed.push(
-            await zlib.brotliDecompressSync(
-                Buffer.from(entry.usage_data, 'utf8')
-            ).toJSON());
+            zlib.brotliDecompressSync(
+                Buffer.from(entry?.usage_data)
+            ));
     })
     if (data.length>0) return res.status(200).json(dataDecompressed);
     else return res.status(200);
