@@ -23,7 +23,7 @@ const getAllUsageData = async (req: ExpressExtended.AuthenticatedRequest, res: R
             ));
     })
 
-    console.log(dataDecompressed[0])
+    console.log(dataDecompressed[0].toString());
     if (data.length>0) return res.status(200).json(dataDecompressed);
     else return res.status(200);
 };
