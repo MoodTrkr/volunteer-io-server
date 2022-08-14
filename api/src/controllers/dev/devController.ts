@@ -14,9 +14,9 @@ const encrypt = async (data: String) => {
 const getAllUsageData = async (req: ExpressExtended.AuthenticatedRequest, res: Response) => {
     var data = await usageRepo.getAllUsageDataDev();
     var dataDecompressed = Array();
-    data.forEach(entry => {
+    data.forEach(async entry => {
         dataDecompressed.push(
-            zlib.brotliDecompressSync(
+            await zlib.brotliDecompressSync(
                 Buffer.from(entry.usage_data, 'utf8')
             ).toJSON());
     })
