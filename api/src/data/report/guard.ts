@@ -5,7 +5,7 @@ export default function isMTUsageData(body: any | undefined): body is mdtkrSchem
     if (body.dailyCollection) {
         const dailyColl = body.dailyCollection;
         if (dailyColl.callLogs && dailyColl.date && dailyColl.screenTime
-            && dailyColl.sleepData && dailyColl.usageLogs && dailyColl.usageStats) null
+            && dailyColl.sleepData && dailyColl.usageLogs ) null
         else {
             return false
         }

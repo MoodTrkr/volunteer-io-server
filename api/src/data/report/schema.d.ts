@@ -14,7 +14,6 @@ export namespace MTData {
         screenTime: number;
         sleepData: SleepData;
         usageLogs: UsageLogs;
-        usageStats: UsageStats;
     }
 
     export interface CallLogs {
@@ -49,6 +48,7 @@ export namespace MTData {
         steps: number;
         time: number;
         unlocks: number;
+        usageStats: UsageStats;
     }
 
     export interface SurveyData {

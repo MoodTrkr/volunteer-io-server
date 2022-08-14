@@ -11,6 +11,7 @@ import isMTUsageData from "../../data/report/guard";
 import type * as schema from 'zapatos/schema';
 import { transaction } from 'zapatos/db';
 import { JWTPayload } from 'express-oauth2-jwt-bearer';
+import console from 'console';
 
 require('dotenv').config({ path: './src/auth/secret-key.env' });
 
@@ -34,6 +35,8 @@ const insertUsageData = controller((req: ExpressExtended.AuthenticatedRequest, r
     const usageDataDate = req.query.date;
     const usageData = req.body;
     const usageDataCheck = isMTUsageData(req.body);
+
+    (!usageDataCheck)? console.log("Not a valid UsageData object"): console.log("Usage object accepted")
 
     if (isStringDefined(userId)
             && typeof usageDataDate === "string"
