@@ -20,7 +20,23 @@ const getAllUsageData = async (req: ExpressExtended.AuthenticatedRequest, res: R
     //         { finishFlush: zlib.constants.BROTLI_OPERATION_FLUSH }
     //     )
     // })
-    if (data.length>0) return res.status(200).json(data);
+    var dataFormatted = Array();
+    data.forEach(entry => {
+        // var entryFormatted = Object()
+        // entryFormatted.id = entry.id;
+        // entryFormatted.id_user = entry.id_user;
+        // entryFormatted.ts = entry.ts;
+        // entryFormatted.usageData = Buffer.from(entry.usage_data, 'base64');
+        // dataFormatted.push(entryFormatted);
+        dataFormatted.push(() => {
+            var entryFormatted = Object();
+            entryFormatted.id = entry.id;
+            entryFormatted.id_user = entry.id_user;
+            entryFormatted.ts = entry.ts;
+            return entryFormatted.usageData = Buffer.from(entry.usage_data, 'base64').toString();
+        });
+    })
+    if (data.length>0) return res.status(200).json(dataFormatted);
     else return res.status(200);
 };
 
