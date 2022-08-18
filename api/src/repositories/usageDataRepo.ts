@@ -9,22 +9,23 @@ import connection from './connection';
 import isMTUsageData from '../data/report/guard';
 
 const insertUsageData = (user: string, time: Date, usageData: mdtkrSchema.MTData.MTUsageData) => {
-    var bufferObject = Buffer.from(JSON.stringify(usageData), 'base64').toString();
-    zlib.brotliCompress(bufferObject, (err: Error | null, zippedData: Buffer) => {
+    zlib.brotliCompress(JSON.stringify(usageData), {
+        params: {
+            [zlib.constants.BROTLI_PARAM_MODE]: zlib.constants.BROTLI_MODE_TEXT
+        }
+    }, (err, data) => {
         if (err) {
-            console.log("error in gzip compression", err);
+            console.error("error in brotli compression", err);
         } else {
             const insert: schema.usage_data_table.Insertable = {
                 id_user: user,
                 ts: time,
-                usage_data: zippedData
+                usage_data: data
             };
-            // db.constraint('usage_data_table_id_user_ts_key'), {
-            //     updateColumns: db.upsert
-            // }).run(connection);
             db.upsert('usage_data_table', insert,
                 db.constraint('usage_data_table_id_user_ts_key'))
-            .run(connection);
+                .run(connection);
+            console.log("Compressed data sucessfully!");
         }
     })
 };
