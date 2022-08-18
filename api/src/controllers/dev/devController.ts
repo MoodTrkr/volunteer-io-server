@@ -26,7 +26,7 @@ const getAllUsageData = async (req: ExpressExtended.AuthenticatedRequest, res: R
         entryFormatted.id = entry.id;
         entryFormatted.id_user = entry.id_user;
         entryFormatted.ts = entry.ts;
-        entryFormatted.usageData = Buffer.from(entry.usage_data, 'base64');
+        entryFormatted.usageData = Buffer.from(entry.usage_data, 'base64').toString();
         dataFormatted.push(entryFormatted);
         // dataFormatted.push(() => {
         //     var entryFormatted = Object();
