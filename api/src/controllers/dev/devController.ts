@@ -19,37 +19,13 @@ const getAllUsageData = async (req: ExpressExtended.AuthenticatedRequest, res: R
         entryFormatted.id = entry.id;
         entryFormatted.id_user = entry.id_user;
         entryFormatted.ts = entry.ts;
-        zlib.brotliDecompress(Buffer.from(entry.usage_data, 'base64'), { finishFlush: zlib.constants.BROTLI_OPERATION_FLUSH },
-            (err, data) => {
-            if (err) {
-                console.error("brotliDecompress: An error occurred:", err);
-            } else {
-                entryFormatted.usage_data = data.toString("utf8");
-                console.log("Decompressed data:", data.toString("utf8"));
-            }
-        });
-        // entryFormatted.usage_data = zlib.brotliDecompressSync(
-        //     entry.usage_data,
-        //     { finishFlush: zlib.constants.BROTLI_OPERATION_FLUSH }
-        // ).toString("utf8");
-        // console.log(entryFormatted.usage_data);
+        entryFormatted.usage_data = zlib.brotliDecompressSync(
+            Buffer.from(entry.usage_data, 'base64'),
+            { finishFlush: zlib.constants.BROTLI_OPERATION_FLUSH }
+        ).toString("utf8");
+        console.log(entryFormatted.usage_data);
         dataFormatted.push(entryFormatted);
     })
-    // data.forEach(entry => {
-    //     var entryFormatted = Object()
-    //     entryFormatted.id = entry.id;
-    //     entryFormatted.id_user = entry.id_user;
-    //     entryFormatted.ts = entry.ts;
-    //     entryFormatted.usageData = Buffer.from(entry.usage_data, 'base64');
-    //     dataFormatted.push(entryFormatted);
-    //     // dataFormatted.push(() => {
-    //     //     var entryFormatted = Object();
-    //     //     entryFormatted.id = entry.id;
-    //     //     entryFormatted.id_user = entry.id_user;
-    //     //     entryFormatted.ts = entry.ts;
-    //     //     return entryFormatted.usageData = Buffer.from(entry.usage_data, 'base64').toString();
-    //     // });
-    // })
     if (data.length>0) return res.status(200).json(dataFormatted);
     else return res.status(200);
 };

@@ -48,10 +48,10 @@ declare module 'zapatos/schema' {
       ts: Date;
       /**
       * **usage_data_table.usage_data**
-      * - `bytea` in database
+      * - `text` in database
       * - `NOT NULL`, no default
       */
-      usage_data: Buffer;
+      usage_data: string;
     }
     export interface JSONSelectable {
       /**
@@ -74,10 +74,10 @@ declare module 'zapatos/schema' {
       ts: db.DateString;
       /**
       * **usage_data_table.usage_data**
-      * - `bytea` in database
+      * - `text` in database
       * - `NOT NULL`, no default
       */
-      usage_data: db.ByteArrayString;
+      usage_data: string;
     }
     export interface Whereable {
       /**
@@ -100,10 +100,10 @@ declare module 'zapatos/schema' {
       ts?: (db.DateString | Date) | db.Parameter<(db.DateString | Date)> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, (db.DateString | Date) | db.Parameter<(db.DateString | Date)> | db.SQLFragment | db.ParentColumn>;
       /**
       * **usage_data_table.usage_data**
-      * - `bytea` in database
+      * - `text` in database
       * - `NOT NULL`, no default
       */
-      usage_data?: (db.ByteArrayString | Buffer) | db.Parameter<(db.ByteArrayString | Buffer)> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, (db.ByteArrayString | Buffer) | db.Parameter<(db.ByteArrayString | Buffer)> | db.SQLFragment | db.ParentColumn>;
+      usage_data?: string | db.Parameter<string> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment | db.ParentColumn>;
     }
     export interface Insertable {
       /**
@@ -126,10 +126,10 @@ declare module 'zapatos/schema' {
       ts: (db.DateString | Date) | db.Parameter<(db.DateString | Date)> | db.SQLFragment;
       /**
       * **usage_data_table.usage_data**
-      * - `bytea` in database
+      * - `text` in database
       * - `NOT NULL`, no default
       */
-      usage_data: (db.ByteArrayString | Buffer) | db.Parameter<(db.ByteArrayString | Buffer)> | db.SQLFragment;
+      usage_data: string | db.Parameter<string> | db.SQLFragment;
     }
     export interface Updatable {
       /**
@@ -152,10 +152,10 @@ declare module 'zapatos/schema' {
       ts?: (db.DateString | Date) | db.Parameter<(db.DateString | Date)> | db.SQLFragment | db.SQLFragment<any, (db.DateString | Date) | db.Parameter<(db.DateString | Date)> | db.SQLFragment>;
       /**
       * **usage_data_table.usage_data**
-      * - `bytea` in database
+      * - `text` in database
       * - `NOT NULL`, no default
       */
-      usage_data?: (db.ByteArrayString | Buffer) | db.Parameter<(db.ByteArrayString | Buffer)> | db.SQLFragment | db.SQLFragment<any, (db.ByteArrayString | Buffer) | db.Parameter<(db.ByteArrayString | Buffer)> | db.SQLFragment>;
+      usage_data?: string | db.Parameter<string> | db.SQLFragment | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment>;
     }
     export type UniqueIndex = 'usage_data_table_id_user_ts_key' | 'usage_data_table_pkey';
     export type Column = keyof Selectable;
