@@ -19,7 +19,8 @@ const getAllUsageData = async (req: ExpressExtended.AuthenticatedRequest, res: R
         entryFormatted.id = entry.id;
         entryFormatted.id_user = entry.id_user;
         entryFormatted.ts = entry.ts;
-        zlib.brotliDecompress(Buffer.from(entry.usage_data, 'base64'), (err, data) => {
+        zlib.brotliDecompress(Buffer.from(entry.usage_data, 'base64'), { finishFlush: zlib.constants.BROTLI_OPERATION_FLUSH },
+            (err, data) => {
             if (err) {
                 console.error("brotliDecompress: An error occurred:", err);
             } else {
