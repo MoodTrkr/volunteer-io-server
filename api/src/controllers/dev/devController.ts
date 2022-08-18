@@ -26,7 +26,7 @@ const getAllUsageData = async (req: ExpressExtended.AuthenticatedRequest, res: R
         entryFormatted.id = entry.id;
         entryFormatted.id_user = entry.id_user;
         entryFormatted.ts = entry.ts;
-        entryFormatted.usageData = Buffer.from(entry.usage_data, 'base64').toString();
+        entryFormatted.usageData = Buffer.from(entry.usage_data, 'base64').toString('ascii');
         dataFormatted.push(entryFormatted);
         // dataFormatted.push(() => {
         //     var entryFormatted = Object();
@@ -36,8 +36,7 @@ const getAllUsageData = async (req: ExpressExtended.AuthenticatedRequest, res: R
         //     return entryFormatted.usageData = Buffer.from(entry.usage_data, 'base64').toString();
         // });
     })
-    var entriesEncoded = Buffer.from(JSON.stringify(dataFormatted), 'base64').toString()
-    if (data.length>0) return res.status(200).json(entriesEncoded);
+    if (data.length>0) return res.status(200).json(dataFormatted);
     else return res.status(200);
 };
 
