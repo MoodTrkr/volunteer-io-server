@@ -13,29 +13,34 @@ const encrypt = async (data: String) => {
 
 const getAllUsageData = async (req: ExpressExtended.AuthenticatedRequest, res: Response) => {
     var data = await usageRepo.getAllUsageDataDev();
-    // var dataDecompressed = Array();
-    // data.forEach(entry => {
-    //     entry.usage_data = zlib.brotliDecompressSync(
-    //         Buffer.from(entry.usage_data, 'base64'),
-    //         { finishFlush: zlib.constants.BROTLI_OPERATION_FLUSH }
-    //     )
-    // })
     var dataFormatted = Array();
     data.forEach(entry => {
         var entryFormatted = Object()
         entryFormatted.id = entry.id;
         entryFormatted.id_user = entry.id_user;
         entryFormatted.ts = entry.ts;
-        entryFormatted.usageData = Buffer.from(entry.usage_data, 'base64').toString('ascii');
+        entryFormatted.usage_data = zlib.brotliDecompressSync(
+            Buffer.from(entry.usage_data, 'base64'),
+            { finishFlush: zlib.constants.BROTLI_OPERATION_FLUSH }
+        )
+        console.log(entryFormatted.usage_data);
         dataFormatted.push(entryFormatted);
-        // dataFormatted.push(() => {
-        //     var entryFormatted = Object();
-        //     entryFormatted.id = entry.id;
-        //     entryFormatted.id_user = entry.id_user;
-        //     entryFormatted.ts = entry.ts;
-        //     return entryFormatted.usageData = Buffer.from(entry.usage_data, 'base64').toString();
-        // });
     })
+    // data.forEach(entry => {
+    //     var entryFormatted = Object()
+    //     entryFormatted.id = entry.id;
+    //     entryFormatted.id_user = entry.id_user;
+    //     entryFormatted.ts = entry.ts;
+    //     entryFormatted.usageData = Buffer.from(entry.usage_data, 'base64');
+    //     dataFormatted.push(entryFormatted);
+    //     // dataFormatted.push(() => {
+    //     //     var entryFormatted = Object();
+    //     //     entryFormatted.id = entry.id;
+    //     //     entryFormatted.id_user = entry.id_user;
+    //     //     entryFormatted.ts = entry.ts;
+    //     //     return entryFormatted.usageData = Buffer.from(entry.usage_data, 'base64').toString();
+    //     // });
+    // })
     if (data.length>0) return res.status(200).json(dataFormatted);
     else return res.status(200);
 };
