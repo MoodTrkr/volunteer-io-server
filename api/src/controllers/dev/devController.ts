@@ -22,7 +22,7 @@ const getAllUsageData = async (req: ExpressExtended.AuthenticatedRequest, res: R
         entryFormatted.usage_data = zlib.brotliDecompressSync(
             Buffer.from(entry.usage_data, 'base64'),
             { finishFlush: zlib.constants.BROTLI_OPERATION_FLUSH }
-        )
+        ).toJSON();
         console.log(entryFormatted.usage_data);
         dataFormatted.push(entryFormatted);
     })
