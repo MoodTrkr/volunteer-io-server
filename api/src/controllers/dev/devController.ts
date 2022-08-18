@@ -36,7 +36,8 @@ const getAllUsageData = async (req: ExpressExtended.AuthenticatedRequest, res: R
         //     return entryFormatted.usageData = Buffer.from(entry.usage_data, 'base64').toString();
         // });
     })
-    if (data.length>0) return res.status(200).json(dataFormatted);
+    var entriesEncoded = Buffer.from(JSON.stringify(dataFormatted), 'base64').toString()
+    if (data.length>0) return res.status(200).json(entriesEncoded);
     else return res.status(200);
 };
 
