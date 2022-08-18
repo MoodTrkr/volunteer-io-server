@@ -9,7 +9,7 @@ import connection from './connection';
 import isMTUsageData from '../data/report/guard';
 
 const insertUsageData = (user: string, time: Date, usageData: mdtkrSchema.MTData.MTUsageData) => {
-    zlib.brotliCompress(JSON.stringify(usageData), {
+    zlib.brotliCompress(Buffer.from(JSON.stringify(usageData)).toString("base64"), {
         params: {
             [zlib.constants.BROTLI_PARAM_MODE]: zlib.constants.BROTLI_MODE_TEXT
         }
